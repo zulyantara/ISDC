@@ -12114,7 +12114,7 @@ CREATE TABLE `mt_user` (
 INSERT INTO `mt_user` (`user_id`, `user_name`, `user_pwd`, `user_level`, `app_id`, `flag`, `aktif`, `area_id`) VALUES
 ('STAFF1',	'STAFF 1',	'c98577ef91a652f5f8728ded7a12053a',	4,	0,	0,	-1,	0),
 ('JIMMY',	'BOD',	'9f6ec193cd6219129580a8626a3ee6a6',	2,	0,	0,	-1,	0),
-('ADMIN',	'ADMINISTRATOR',	'73acd9a5972130b75066c82595a1fae3',	1,	0,	0,	-1,	0),
+('ADMIN',	'ADMINISTRATOR',	'a6c993aceacc57e783d3379f06ac8305',	1,	0,	0,	-1,	0),
 ('KASIR1',	'KASIR 1',	'74874dbd64267930d2c8c780833a6315',	3,	11,	0,	-1,	0),
 ('KASIR2',	'KASIR 2',	'c4a1b8227ebd827d4d0f8261366129dd',	3,	12,	0,	-1,	0),
 ('INSTR2',	'INSTRUKTUR 2',	'0cf38e54efa0ff94c4d0394b09823d94',	3,	102,	0,	-1,	0),
@@ -12124,24 +12124,6 @@ INSERT INTO `mt_user` (`user_id`, `user_name`, `user_pwd`, `user_level`, `app_id
 ('PRIHANTOOSA',	'prihantoosa',	'37e2b5f2a37040fd577c610e7db2b422',	1,	0,	0,	-1,	0),
 ('TARA',	'ADMINISTRATOR',	'2c842d72963554e4ca6286bb120777f6',	6,	0,	0,	-1,	0),
 ('ADMIN1',	'ADMIN1',	'02192570553ca9660eef10ae361388ef',	1,	0,	0,	-1,	0);
-
-DELIMITER ;;
-
-CREATE TRIGGER `mt_user_before_insert` BEFORE INSERT ON `mt_user` FOR EACH ROW
-BEGIN
-
-  SET NEW.`user_pwd` = MD5(NEW.`user_pwd`);
-
-END;;
-
-CREATE TRIGGER `mt_user_before_update` BEFORE UPDATE ON `mt_user` FOR EACH ROW
-BEGIN
-
-  IF NEW.`user_pwd` <> OLD.`user_pwd` THEN
-    SET NEW.`user_pwd` = MD5(NEW.`user_pwd`);
-  END IF;
-
-END;;
 
 DELIMITER ;
 
