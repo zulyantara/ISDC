@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Form, Input, Button, Typography, Space, message } from 'antd'
-import { UserOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAuth } from '../../context/AuthContext'
 
 const { Title, Text } = Typography
@@ -51,14 +51,8 @@ export default function Login() {
         border: 'none',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{
-            width: 72, height: 72, borderRadius: 16,
-            background: 'linear-gradient(135deg, #1677ff 0%, #4096ff 100%)',
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-            marginBottom: 16,
-          }}>
-            <SafetyOutlined style={{ fontSize: 36, color: '#fff' }} />
-          </div>
+          <img src="/logo_isdc.jpeg" alt="ISDC Logo"
+            style={{ width: 80, height: 80, borderRadius: 16, objectFit: 'cover', marginBottom: 16 }} />
           <Title level={3} style={{ margin: 0 }}>ISDC</Title>
           <Text type="secondary">Indonesia Safety Driving Center</Text>
         </div>
