@@ -54,7 +54,9 @@ go version
 ## 📦 Step 2: Clone Repository
 
 ```bash
-cd /home/$USER
+sudo mkdir -p /var/www/apps
+cd /var/www/apps
+sudo chown $USER:$USER /var/www/apps
 git clone git@github.com:zulyantara/ISDC.git
 cd ISDC
 ```
@@ -158,7 +160,7 @@ cd backend
 go mod tidy
 
 # Build binary
-go build -o /home/$USER/isdc-api main.go
+go build -o /var/www/apps/isdc/backend/isdc-api main.go
 
 # Test run
 ./isdc-api &
@@ -171,13 +173,16 @@ kill %1
 ### 4.4 Setup PM2
 
 ```bash
-cd /home/$USER/ISDC
+cd /var/www/apps/isdc
+
+# Buat folder logs
+mkdir -p logs
 
 # Start with PM2
 pm2 start backend/isdc-api \
   --name "isdc-api" \
-  --cwd /home/$USER/ISDC/backend \
-  --log /home/$USER/ISDC/logs/api.log \
+  --cwd /var/www/apps/isdc/backend \
+  --log /var/www/apps/isdc/logs/api.log \
   --time
 
 # Save PM2 config
@@ -218,12 +223,8 @@ npm run build
 # Install Nginx (jika belum ada)
 sudo apt update && sudo apt install -y nginx
 
-# Copy build ke Nginx
-sudo cp -r dist/* /var/www/html/
-
-# Atau buat location khusus
-sudo mkdir -p /var/www/isdc
-sudo cp -r dist/* /var/www/isdc/
+# Frontend sudah di /var/www/apps/isdc/frontend/dist/
+# Tidak perlu copy, langsung arahkan Nginx ke sana
 ```
 
 ### 5.3 Config Nginx
@@ -236,7 +237,7 @@ server {
 
     # Frontend React
     location / {
-        root /var/www/isdc;
+        root /var/www/apps/isdc/frontend/dist;
         index index.html;
         try_files $uri $uri/ /index.html;  # SPA fallback
     }
@@ -344,7 +345,7 @@ sudo tail -f /var/log/nginx/error.log
 ### Update Application
 
 ```bash
-cd /home/$USER/ISDC
+cd /var/www/apps/isdc
 
 # Pull latest code
 git pull
@@ -357,7 +358,7 @@ pm2 restart isdc-api
 # Rebuild frontend
 cd ../frontend
 npm run build
-sudo cp -r dist/* /var/www/isdc/
+sudo cp -r dist/* /var/www/apps/isdc/frontend/dist/
 ```
 
 ---
@@ -388,7 +389,7 @@ pm2 logs isdc-api --err --lines 50
 pm2 restart isdc-api
 
 # Jika binary corrupt, rebuild
-cd backend && go build -o isdc-api main.go
+cd /var/www/apps/isdc/backend && go build -o isdc-api main.go
 pm2 restart isdc-api
 ```
 
@@ -418,8 +419,8 @@ sudo kill -9 <PID>
 │  └──────────┘    └──────────┘    └──────────┘       │
 │       │                              │               │
 │       ▼                              ▼               │
-│  /var/www/isdc                  Docker Volume        │
-│  (static files)                (persistent data)     │
+│  /var/www/apps/isdc             Docker Volume        │
+│  (full project)                (persistent data)     │
 │                                                      │
 └─────────────────────────────────────────────────────┘
 ```
@@ -459,5 +460,5 @@ sudo tail -f /var/log/nginx/error.log
 docker exec isdc-mysql mysql -u root -pisdc_root_2024 isdc_db
 
 # === Update ===
-git pull && cd backend && go build -o isdc-api main.go && pm2 restart isdc-api && cd ../frontend && npm run build && sudo cp -r dist/* /var/www/isdc/
+cd /var/www/apps/isdc && git pull && cd backend && go build -o isdc-api main.go && pm2 restart isdc-api && cd ../frontend && npm run build
 ```
