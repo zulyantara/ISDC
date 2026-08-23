@@ -13,7 +13,6 @@ services:
       - "${DB_PORT:-3306}:3306"
     volumes:
       - jsdc_mysql_data:/var/lib/mysql
-      - ./docker-init:/docker-entrypoint-initdb.d
     command: >
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
