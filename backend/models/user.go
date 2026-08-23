@@ -7,7 +7,6 @@ import (
 )
 
 type User struct {
-	IDUser    int    `json:"id_user"`
 	UserID    string `json:"user_id"`
 	UserName  string `json:"user_name"`
 	UserLevel int    `json:"user_level"`
@@ -32,7 +31,7 @@ type LoginResponse struct {
 
 // GetAllUsers returns all users
 func GetAllUsers() ([]User, error) {
-	query := "SELECT id_user, user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user ORDER BY user_id"
+	query := "SELECT user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user ORDER BY user_id"
 	rows, err := config.DB.Query(query)
 	if err != nil {
 		return nil, err
@@ -42,7 +41,7 @@ func GetAllUsers() ([]User, error) {
 	var users []User
 	for rows.Next() {
 		var u User
-		err := rows.Scan(&u.IDUser, &u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
+		err := rows.Scan(&u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
 		if err != nil {
 			return nil, err
 		}
@@ -53,9 +52,9 @@ func GetAllUsers() ([]User, error) {
 
 // GetUserByID returns a single user by user_id
 func GetUserByID(userID string) (*User, error) {
-	query := "SELECT id_user, user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user WHERE user_id = ?"
+	query := "SELECT user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user WHERE user_id = ?"
 	var u User
-	err := config.DB.QueryRow(query, userID).Scan(&u.IDUser, &u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
+	err := config.DB.QueryRow(query, userID).Scan(&u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
 	if err != nil {
 		return nil, err
 	}
@@ -68,9 +67,9 @@ func AuthenticateUser(userID, password string) (*User, error) {
 	// 1. Fetch user + password hash from DB
 	var u User
 	var storedHash string
-	query := "SELECT id_user, user_id, user_name, user_level, app_id, flag, aktif, area_id, user_pwd FROM mt_user WHERE user_id = ? AND aktif = -1"
+	query := "SELECT user_id, user_name, user_level, app_id, flag, aktif, area_id, user_pwd FROM mt_user WHERE user_id = ? AND aktif = -1"
 	err := config.DB.QueryRow(query, userID).Scan(
-		&u.IDUser, &u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID, &storedHash,
+		&u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID, &storedHash,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("user not found or inactive")
@@ -133,7 +132,7 @@ func DeleteUser(userID string) error {
 
 // GetUsersByArea returns users filtered by area
 func GetUsersByArea(areaID int) ([]User, error) {
-	query := "SELECT id_user, user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user WHERE area_id=? ORDER BY user_id"
+	query := "SELECT user_id, user_name, user_level, app_id, flag, aktif, area_id FROM mt_user WHERE area_id=? ORDER BY user_id"
 	rows, err := config.DB.Query(query, areaID)
 	if err != nil {
 		return nil, err
@@ -143,7 +142,7 @@ func GetUsersByArea(areaID int) ([]User, error) {
 	var users []User
 	for rows.Next() {
 		var u User
-		err := rows.Scan(&u.IDUser, &u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
+		err := rows.Scan(&u.UserID, &u.UserName, &u.UserLevel, &u.AppID, &u.Flag, &u.Aktif, &u.AreaID)
 		if err != nil {
 			return nil, err
 		}
