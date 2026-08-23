@@ -46763,6 +46763,8 @@ CREATE TABLE `tb_peserta` (
   `tgl_update` datetime DEFAULT NULL,
   `user_id` varchar(50) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
+  `praktek_hasil` varchar(3) DEFAULT NULL,
+  `praktek_id` int(5) DEFAULT NULL,
   PRIMARY KEY (`peserta_id`),
   KEY `area_id` (`area_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=FIXED COMMENT='Daftar peserta pelatihan';
