@@ -44,7 +44,7 @@ func LoadConfig() {
 			Port:     getEnv("DB_PORT", "3306"),
 			User:     getEnv("DB_USER", "root"),
 			Password: getEnv("DB_PASSWORD", ""),
-			Name:     getEnv("DB_NAME", "db_jsdc"),
+			Name:     getEnv("DB_NAME", "isdc_db"),
 		},
 		JWT: JWTConfig{
 			Secret:          getEnv("JWT_SECRET", "default-secret-change-me"),

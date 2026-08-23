@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"jsdc-api/config"
+	"isdc-api/config"
 	"net/http"
 	"strings"
 

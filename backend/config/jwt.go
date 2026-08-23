@@ -25,7 +25,7 @@ func GenerateToken(userID, userName string, userLevel, areaID int) (string, erro
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(AppConfig.JWT.Expiry) * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			Issuer:    "jsdc-api",
+			Issuer:    "isdc-api",
 		},
 	}
 

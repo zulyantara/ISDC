@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"jsdc-api/handlers"
-	"jsdc-api/middleware"
+	"isdc-api/handlers"
+	"isdc-api/middleware"
 
 	"github.com/gin-gonic/gin"
 )

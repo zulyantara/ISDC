@@ -1,8 +1,8 @@
 package models
 
 import (
-	"jsdc-api/config"
-	"jsdc-api/utils"
+	"isdc-api/config"
+	"isdc-api/utils"
 	"fmt"
 )
 

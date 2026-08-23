@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"jsdc-api/models"
-	"jsdc-api/utils"
+	"isdc-api/models"
+	"isdc-api/utils"
 	"fmt"
 	"time"
 

@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"fmt"
-	"jsdc-api/models"
-	"jsdc-api/utils"
+	"isdc-api/models"
+	"isdc-api/utils"
 
 	"github.com/gin-gonic/gin"
 )

@@ -33,7 +33,7 @@ CREATE TRIGGER `SYM_ON_I_FOR_STCK_PNM_DTL_TRG_CBNG` AFTER INSERT ON `stock_opnam
 begin                                                                                                                                                     
                                    
                                   if 1=1 and @sync_triggers_disabled is null then                                                                                                 
-                                    insert into `db_jsdc`.sym_data (table_name, event_type, trigger_hist_id, row_data, channel_id, transaction_id, source_node_id, external_data, create_time)
+                                    insert into `isdc_db`.sym_data (table_name, event_type, trigger_hist_id, row_data, channel_id, transaction_id, source_node_id, external_data, create_time)
                                     values(                                                                                                                                                            
                                       'stock_opname_detil',                                                                                                                                            
                                       'I',                                                                                                                                                             
@@ -50,7 +50,7 @@ begin
           if(new.`sod_lasttime_update` is null,'',concat('"',cast(new.`sod_lasttime_update` as char),'"')),',',
           if(new.`sod_lastuser_update` is null,'',concat('"',cast(new.`sod_lastuser_update` as char),'"'))                                                                                                                                                
                                        ),                                                                                                                                                              
-                                      'sale_transaction', `db_jsdc`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                        
+                                      'sale_transaction', `isdc_db`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                        
                                       null,                                                                                                                                               
                                       CURRENT_TIMESTAMP                                                                                                                                                
                                     );                                                                                                                                                                 
@@ -87,7 +87,7 @@ begin
           if(old.`sod_lasttime_update` is null,'',concat('"',cast(old.`sod_lasttime_update` as char),'"')),',',
           if(old.`sod_lastuser_update` is null,'',concat('"',cast(old.`sod_lastuser_update` as char),'"')));                                                                                                                           
                                    if 1=1 then                                                                                                                                  
-	                                    insert into `db_jsdc`.sym_data (table_name, event_type, trigger_hist_id, pk_data, row_data, old_data, channel_id, transaction_id, source_node_id, external_data, create_time)
+	                                    insert into `isdc_db`.sym_data (table_name, event_type, trigger_hist_id, pk_data, row_data, old_data, channel_id, transaction_id, source_node_id, external_data, create_time)
 	                                    values(                                                                                                                                                           
 	                                      'stock_opname_detil',                                                                                                                                           
 	                                      'U',                                                                                                                                                            
@@ -97,7 +97,7 @@ begin
 	                                       ),                                                                                                                                                             
 	                                      var_row_data,                                                                                                                                                   
 	                                      var_old_data,                                                                                                                                                   
-	                                      'sale_transaction', `db_jsdc`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                       
+	                                      'sale_transaction', `isdc_db`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                       
 	                                      null,                                                                                                                                              
 	                                      CURRENT_TIMESTAMP                                                                                                                                               
 	                                    );                                                                                                                                                                
@@ -110,7 +110,7 @@ CREATE TRIGGER `SYM_ON_D_FOR_STCK_PNM_DTL_TRG_CBNG` AFTER DELETE ON `stock_opnam
 begin                                                                                                                                                     
                                    
                                   if 1=1 and @sync_triggers_disabled is null then                                                                                                 
-                                    insert into `db_jsdc`.sym_data (table_name, event_type, trigger_hist_id, pk_data, old_data, channel_id, transaction_id, source_node_id, external_data, create_time)
+                                    insert into `isdc_db`.sym_data (table_name, event_type, trigger_hist_id, pk_data, old_data, channel_id, transaction_id, source_node_id, external_data, create_time)
                                     values(                                                                                                                                                            
                                       'stock_opname_detil',                                                                                                                                            
                                       'D',                                                                                                                                                             
@@ -130,7 +130,7 @@ begin
           if(old.`sod_lasttime_update` is null,'',concat('"',cast(old.`sod_lasttime_update` as char),'"')),',',
           if(old.`sod_lastuser_update` is null,'',concat('"',cast(old.`sod_lastuser_update` as char),'"'))                                                                                                                                            
                                        ),                                                                                                                                                              
-                                      'sale_transaction', `db_jsdc`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                        
+                                      'sale_transaction', `isdc_db`.sym_transaction_id_post_5_7_6(), @sync_node_disabled,                                                                                                        
                                       null,                                                                                                                                               
                                       CURRENT_TIMESTAMP                                                                                                                                                
                                     );                                                                                                                                                                 

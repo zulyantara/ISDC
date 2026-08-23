@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"jsdc-api/utils"
+	"isdc-api/utils"
 
 	"github.com/gin-gonic/gin"
 )

@@ -91,9 +91,9 @@ go run main.go
 |----------|---------|------------|
 | `DB_HOST` | `localhost` | Host database |
 | `DB_PORT` | `3306` | Port database |
-| `DB_USER` | `jsdc` | Username database |
-| `DB_PASSWORD` | `jsdc_pass` | Password database |
-| `DB_NAME` | `db_jsdc` | Nama database |
+| `DB_USER.*isdc` | Username database |
+| `DB_PASSWORD.*isdc_pass` | Password database |
+| `DB_NAME` | `isdc_db` | Nama database |
 | `JWT_SECRET` | *(generate sendiri)* | Secret key JWT |
 | `JWT_EXPIRY` | `24` | Token expired dalam jam |
 | `SERVER_PORT` | `8080` | Port Go API |
@@ -296,7 +296,7 @@ docker compose restart
 
 ```bash
 # Login ke MySQL dan cek user
-docker exec -it jsdc-mysql mysql -u root -pjsdc_root_2024 -e "SELECT user, host FROM mysql.user;"
+docker exec -it isdc-mysql mysql -u root -pisdc_root_2024 -e "SELECT user, host FROM mysql.user;"
 ```
 
 ### Port sudah digunakan

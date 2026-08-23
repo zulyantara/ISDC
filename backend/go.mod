@@ -1,4 +1,4 @@
-module jsdc-api
+module isdc-api
 
 go 1.21
 

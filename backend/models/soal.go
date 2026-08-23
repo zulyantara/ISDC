@@ -1,7 +1,7 @@
 package models
 
 import (
-	"jsdc-api/config"
+	"isdc-api/config"
 )
 
 type Soal struct {

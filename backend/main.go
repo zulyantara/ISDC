@@ -1,9 +1,9 @@
 package main
 
 import (
-	"jsdc-api/config"
-	"jsdc-api/middleware"
-	"jsdc-api/routes"
+	"isdc-api/config"
+	"isdc-api/middleware"
+	"isdc-api/routes"
 	"log"
 
 	"github.com/gin-gonic/gin"

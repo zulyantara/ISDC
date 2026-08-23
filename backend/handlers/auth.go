@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"jsdc-api/config"
-	"jsdc-api/models"
-	"jsdc-api/utils"
+	"isdc-api/config"
+	"isdc-api/models"
+	"isdc-api/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
