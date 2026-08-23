@@ -2,7 +2,7 @@ services:
   jsdc-db:
     image: mysql:8.0
     container_name: jsdc-mysql
-    restart: unless-stopped
+    restart: no
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-jsdc_root_2024}
       MYSQL_DATABASE: ${DB_NAME:-db_jsdc}
