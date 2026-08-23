@@ -1,0 +1,30 @@
+services:
+  jsdc-db:
+    image: mysql:8.0
+    container_name: jsdc-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-jsdc_root_2024}
+      MYSQL_DATABASE: ${DB_NAME:-db_jsdc}
+      MYSQL_USER: ${DB_USER:-jsdc}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-jsdc_pass}
+      TZ: Asia/Jakarta
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - jsdc_mysql_data:/var/lib/mysql
+      - ./docker-init:/docker-entrypoint-initdb.d
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max_connections=200
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-jsdc_root_2024}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  jsdc_mysql_data:
+    driver: local
